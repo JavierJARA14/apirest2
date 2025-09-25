@@ -12,7 +12,12 @@ function findAll(){
 function findById(id){
     return users.find((u) => u.id === id) || null;
 }
-
+/*
+    Validaciones para addUser:
+    - Los campos nombre y edad no pueden estar vacíos.
+    - La edad debe ser un valor válido > 18.
+    - Expresión regular para el correo.
+*/
 function addUser(item){
     const user = {
         id: randomUUID(),
@@ -24,7 +29,12 @@ function addUser(item){
     users.push(user);
     return user;
 }
-
+/*
+    Validaciones para updateUser:
+    - Actualizar una edad válida.
+    - Actualizar un correo válido.
+    - No dejar el nombre vacío.
+*/
 function updateUser(id, data){
     const index = users.findIndex((u) => u.id === id);
     if(index == -1) return null;
