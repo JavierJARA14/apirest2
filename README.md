@@ -23,9 +23,13 @@ Este proyecto es una **API REST** para un sistema gestor de usuarios utilizando 
 
 ### `addUser(item)`
 - Crea una nueva tarea con los datos del body. El id es autogenerado y active se pone por defecto en true.
+- Valida que el nombre y edad no estén vacíos.
+- Valida que el usuario sea mayor de edad.
+- Valida que el correo sea válido (este campo sí puede estar vacío).
 
 ### `updateUser(id, data)`
 - Actualiza todos los datos menos el id del usuario con el ID indicado.   
+- Valida los datos enviados conforme a las validaciones de addUser.
 
 ---
 

@@ -16,13 +16,30 @@ exports.findById = (req, res) => {
     return res.status(200).json(data);
 }
 
+/*
+    Validaciones para addUser:
+    - Los campos nombre y edad no pueden estar vacíos.
+    - La edad debe ser un valor válido > 18.
+    - Expresión regular para el correo.
+*/
+
 exports.addUser = (req, res) => {
     const user = req.body;
     //Otra forma
     //const addedUser = User.addUser(req.body);
+    if(!req.body.name || !req.body.age) return res.status(400).json({message: "El nombre y/o edad no pueden estar vacíos."});
+    if(req.body.age < 18) return res.status(400).json({message: "El usuario debe ser mayor de edad."});
+    if(!validateEmail(req.body.email)) return res.status(400).json({message: "Correo inválido"});
     const addedUser = User.addUser(user);
     return res.status(200).json(addedUser);
 }
+
+/*
+    Validaciones para updateUser:
+    - Actualizar una edad válida (mayor de edad).
+    - Actualizar un correo válido.
+    - No dejar el nombre vacío.
+*/
 
 exports.updateUser = (req, res) => {
     const id = req.params.id;
@@ -30,9 +47,18 @@ exports.updateUser = (req, res) => {
     //Otra forma
     //const updatedUser = User.updateUser(req.params.id, req.body);
     // return updatedUser ? res.status(200).json({message: "Usuario actualizado con éxito."}) : res.status(404).json({message: "No se encontró el usuario"})
+    if(!req.body.name || !req.body.age) return res.status(400).json({message: "El nombre y/o edad no pueden estar vacíos."});
+    if(req.body.age < 18) return res.status(400).json({message: "El usuario debe ser mayor de edad."});
+    if(!validateEmail(req.body.email)) return res.status(400).json({message: "Correo inválido"});
     const updatedUser = User.updateUser(id, user);
     if (!updatedUser) return res.status(404).json({message: "No se encontró el usuario"});
     return res.status(200).json({message: "Usuario actualizado con éxito."});
+}
+
+function validateEmail(email){
+    if(!email) return true;
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
 }
 
 //Si en lugar de exports. usas function
