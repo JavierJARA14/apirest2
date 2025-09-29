@@ -1,10 +1,13 @@
+//Agregamos esto para generar id random
 const { randomUUID } = require("node:crypto");
 
+//Modelo de datos
 let users = [
     {id: randomUUID(), name: "Javier", email: "correo@example.com", active: true, age: 18},
     {id: randomUUID(), name: "Valentin", email: "correo2@example.com", active: false, age: 22}
 ];
 
+//Funciones que manejan el modelo
 function findAll(){
     return users;
 }
@@ -37,5 +40,5 @@ function updateUser(id, data){
     }
     return users[index];
 }
-
+//Exporta las funciones
 module.exports = {findAll, findById, addUser, updateUser};

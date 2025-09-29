@@ -1,6 +1,11 @@
+//Importamos el modelo
 const User = require('../models/user.model');
 //const {findAll, findById, addUser, updateUser} = require('../models/user.model');
 
+//Funciones que manejan las respuestas
+//Algunas manejan validaciones extra
+//Al tomar los datos del body
+//.export las exporta automáticamente
 exports.findAll = (req, res) => {
     const data = User.findAll();
     res.status(200).json(data);
@@ -55,6 +60,7 @@ exports.updateUser = (req, res) => {
     return res.status(200).json({message: "Usuario actualizado con éxito."});
 }
 
+//Función para validar correos (en caso haya algo dentro, si esta vacío retorna true)
 function validateEmail(email){
     if(!email) return true;
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
