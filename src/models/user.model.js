@@ -6,12 +6,37 @@ let users = [
     {id: randomUUID(), name: "Javier", email: "correo@example.com", active: true, age: 18},
     {id: randomUUID(), name: "Valentin", email: "correo2@example.com", active: false, age: 22}
 ];
-
 //Funciones que manejan el modelo
 function findAll(){
     return users;
 }
 
+function filterUser(filter = {}) {
+  let result = users;
+
+  if (filter.name) {
+    const q = String(filter.name).toLowerCase();
+    result = result.filter((item) => item.name.toLowerCase().includes(q));
+  }
+  if(filter.age) {
+    const r = Number(filter.age);
+    result = result.filter((item) => item.age === r);
+  }
+  if(typeof filter.active !== 'undefined') {
+    let s ;
+    if (filter.active === 'true'){
+        s = true;
+    }else if (filter.active === 'false'){
+        s = false
+    }
+    result = result.filter((item) => item.active === s);
+  }
+
+  return result;
+
+}
+
+//?name=sra&active=false
 function findById(id){
     return users.find((u) => u.id === id) || null;
 }
@@ -41,4 +66,4 @@ function updateUser(id, data){
     return users[index];
 }
 //Exporta las funciones
-module.exports = {findAll, findById, addUser, updateUser};
+module.exports = {findAll, findById, addUser, updateUser, filterUser};

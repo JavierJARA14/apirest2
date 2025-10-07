@@ -7,7 +7,9 @@ const User = require('../models/user.model');
 //Al tomar los datos del body
 //.export las exporta automáticamente
 exports.findAll = (req, res) => {
-    const data = User.findAll();
+    //const data = User.findAll();
+    const data = User.filterUser(req.query);
+    
     res.status(200).json(data);
 }
 
@@ -49,6 +51,7 @@ exports.addUser = (req, res) => {
 exports.updateUser = (req, res) => {
     const id = req.params.id;
     const user = req.body;
+    //const {user, id} = req.body;
     //Otra forma
     //const updatedUser = User.updateUser(req.params.id, req.body);
     // return updatedUser ? res.status(200).json({message: "Usuario actualizado con éxito."}) : res.status(404).json({message: "No se encontró el usuario"})
