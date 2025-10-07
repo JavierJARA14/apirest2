@@ -4,6 +4,12 @@ Este proyecto es una **API REST** para un sistema gestor de usuarios utilizando 
 
 ---
 
+## Ramas
+- **Main**: Esta rama contiene un api rest de gestión de usuarios.
+- **api_key**: Esta rama contiene adicionalmente un filtro de usuarios y una api key para acceso.
+
+---
+
 ## Estructura del Proyecto
 
 - **Modelos (`models`)**: Manejan los datos de los usuarios, realizando operaciones; crear, actualizar y buscar tareas en la "base de datos" (un arreglo en memoria) ya sea todas o por id.  
