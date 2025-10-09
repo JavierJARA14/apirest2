@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 
 //Define la ruta de las api y usa un puerto para un host local
 app.use("/api/users", (req,res,next) => {
-     res.set('x-api-key', api_key);
+     //res.set('x-api-key', api_key);
      const acc_key = req.get('x-api-key');
      if(!acc_key || acc_key !== api_key){
         return res.status(401).json({
