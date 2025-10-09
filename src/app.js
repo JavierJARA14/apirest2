@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
 app.use("/api/users", (req,res,next) => {
      //res.set('x-api-key', api_key);
      const acc_key = req.get('x-api-key');
+     //Otra solución
+     //const acc_key = req.headers('x-api-key');
      if(!acc_key || acc_key !== api_key){
         return res.status(401).json({
         error: 'Se requiere de una api key válida'
